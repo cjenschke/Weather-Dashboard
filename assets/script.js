@@ -2,12 +2,21 @@ const searchButton = document.getElementById('searchButton');
 const cityInput = document.getElementById('cityInput');
 const weatherInfo = document.getElementById('weatherInfo');
 const forecastInfo = document.getElementById('forecastInfo');
+const recentCitiesList = document.getElementById('recentCitiesList');
 const apiKey = '45fbf3ab9f66b35b8a2d225399ff949c';
+const maxCities = 5
+
+//Load the last entered city from localStorage
+const lastCitySearch = localStorage.getItem('recentCities');
 
 // Event listener for search button
 searchButton.addEventListener('click', function(){
+    // Toggle backround from being hidden
+    background.classList.toggle('hidden');
    const city = cityInput.value;
    getWeatherData(city);
+   saveRecentCity(city);// Save the searched city
+   displayRecentCities();//Display the updated list of searched cities
 
     //log city that was searched in console
     console.log('Search for ' + city);
@@ -81,3 +90,36 @@ fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey
 
 }
   
+function saveRecentCity(city){
+    let recentCities = JSON.parse(localStorage.getItem('recentCities')) || [];
+
+    const index = recentCities.indexOf(city);
+    if (index !== -1){
+        recentCities.splice(index, 1);
+    }
+
+    recentCities.unshift(city);
+
+    recentCities = recentCities.slice(0, maxCities);
+
+    localStorage.setItem('recentCities', JSON.stringify(recentCities));
+
+}
+
+function displayRecentCities(){
+
+    recentCitiesList.innerHTML='';
+
+    let recentCites = JSON.parse(localStorage.getItem('recentCities')) || [];
+
+    for (const city of recentCites){
+        const savedCityButton = document.createElement('savedCityButton');
+        savedCityButton.textContent = city;
+        savedCityButton.addEventListener('click', function(){
+            getWeatherData(city);
+        });
+        recentCitiesList.appendChild(savedCityButton);
+    }
+}
+
+displayRecentCities();

@@ -7,6 +7,9 @@ body {
     padding: 0;
     min-height: 100vh;
 }
+.hidden{
+    display: none;
+}
 
 header{
     background-color: rgb(22, 162, 187);
@@ -29,6 +32,41 @@ button{
     font-size: 16px;
 }
 
+h4{
+    text-align: center;
+
+}
+savedcitybutton {
+    box-sizing: border-box;
+    flex-wrap: wrap;
+    flex-direction: row;
+    flex: 50%;
+    align-items: center;
+    margin-bottom: 5px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+
+
+}
+#recentCitiesList {
+    /* display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    border: 1px solid #ccc; */
+    /* display: block;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+    color: #333;
+    font-size: 16px;
+    text-align: center;
+    width: 100%; */
+    cursor: pointer;
+}
+
 main{
     display: flex;
     flex-direction: column;
@@ -44,6 +82,38 @@ main{
     border: 1px solid #ccc;
     border-radius: 10px;
     background-color: #f9f9f9;}
+
 #weatherInfo{
     margin-top: 20px;
+}
+
+#forecastInfo{
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+}
+
+
+li {
+    box-sizing: border-box;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    flex: 50%;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+
+}
+@media screen and (max-width: 600px) {
+    .forecast { 
+        flex-direction: column;
+}
 }
