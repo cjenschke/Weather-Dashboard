@@ -87,31 +87,22 @@ fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey
 .catch(function (error) {
     console.error('Error fetching current weather data:', error);
  });
-
 }
-  
+  // Save recent searched cities
 function saveRecentCity(city){
     let recentCities = JSON.parse(localStorage.getItem('recentCities')) || [];
-
     const index = recentCities.indexOf(city);
     if (index !== -1){
         recentCities.splice(index, 1);
     }
-
     recentCities.unshift(city);
-
     recentCities = recentCities.slice(0, maxCities);
-
     localStorage.setItem('recentCities', JSON.stringify(recentCities));
-
 }
-
+    // Display recent searched cities
 function displayRecentCities(){
-
     recentCitiesList.innerHTML='';
-
     let recentCites = JSON.parse(localStorage.getItem('recentCities')) || [];
-
     for (const city of recentCites){
         const savedCityButton = document.createElement('savedCityButton');
         savedCityButton.textContent = city;
